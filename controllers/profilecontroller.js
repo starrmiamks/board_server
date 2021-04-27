@@ -4,9 +4,9 @@ let validateSession = require('../middleware/validate-session');
 const Profile = require('../db').import('../models/profile');
 
 
-router.get('/practice', validateSession, function (req, res) {
-    res.send('Hey!! This is a practice route!')
-})
+// router.get('/practice', validateSession, function (req, res) {
+//     res.send('Hey!! This is a practice route!')
+// })
 
 router.post('/add', validateSession, (req, res) => {
     const profileEntry = {
@@ -19,6 +19,20 @@ router.post('/add', validateSession, (req, res) => {
         .then(profile => res.status(200).json(profile))
         .catch(err => res.status(500).json({ error: err }))
 })
+
+// router.post('/add', validateSession, async (req, res) => {
+//     try {
+//         const profileEntry = await Profile.Create({
+//             userId: req.user.id,
+//             picture: req.body.profile.picture,
+//             title: req.body.profile.title,
+//             details: req.body.profile.details
+//         })
+//         res.status(200).json(profileEntry)
+//     } catch (err) {
+//         res.status(500).json({ error: err })
+//     }
+// })
 
 router.get('/', (req, res) => {
     Profile.findAll()

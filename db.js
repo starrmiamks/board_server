@@ -12,4 +12,15 @@ sequelize.authenticate().then(
         console.log(err);
     }
 );
+
+User = sequelize.import('./models/user');
+Profile = sequelize.import('./models/profile');
+Subscription = sequelize.import('./models/subscription');
+
+User.hasOne(Subscription);
+Subscription.belongsTo(User);
+
+Profile.belongsTo(User);
+User.hasMany(Profile);
+
 module.exports = sequelize;

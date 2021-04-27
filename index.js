@@ -5,7 +5,7 @@ let sequelize = require('./db');
 
 let user = require('./controllers/usercontroller');
 let profile = require('./controllers/profilecontroller');
-let sub = require('./controllers/subscriptioncontroller');
+let subscription = require('./controllers/subscriptioncontroller');
 
 sequelize.sync();
 app.use(express.json());

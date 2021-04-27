@@ -1,20 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-    const sub = sequelize.define('subscription', {
-        userId: {
-            type: DataTypes.INTEGER,
-        },
-        subscriptionStart: {
-            type: DataTypes.DATE
-        },
-        subscriptionType: {
-            type: DataTypes.ENUM('M', 'Y')
-        },
+    const Subscription = sequelize.define('subscription', {
         streetAddress1: {
             type: DataTypes.STRING,
             allowNull: false
         },
         streetAddress2: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: true
         },
         city: {
             type: DataTypes.STRING,
@@ -28,6 +20,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-    }),
-    return sub;
+    })
+    return Subscription;
 };
