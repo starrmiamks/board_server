@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         streetAddress2: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            unique: true
         },
         city: {
             type: DataTypes.STRING,
@@ -20,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        entryId: {
+            type: DataTypes.INTEGER,
+        }
     })
     return Subscription;
 };
