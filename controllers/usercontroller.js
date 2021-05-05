@@ -9,8 +9,6 @@ router.post('/register', function (req, res) {
         password: bcrypt.hashSync(req.body.user.password, 13),
         firstName: req.body.user.firstName,
         lastName: req.body.user.lastName,
-        isAdmin: req.body.user.isAdmin,
-        isSubscriber: req.body.user.isSubscriber,
     })
         .then(
             function registerSuccess(user) {

@@ -16,13 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         lastName: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        isAdmin: {
-            type: DataTypes.BOOLEAN
-        },
-        isSubscriber: {
-            type: DataTypes.BOOLEAN
-        },
+        }
     });
     return user;
 };

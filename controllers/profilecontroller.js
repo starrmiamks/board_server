@@ -2,6 +2,7 @@ let express = require('express');
 let router = express.Router();
 let validateSession = require('../middleware/validate-session');
 const Profile = require('../db').import('../models/profile');
+// const cloudinary = require('cloudinary');npm 
 
 
 // router.get('/practice', validateSession, function (req, res) {
@@ -35,7 +36,7 @@ router.get('/', async (req, res) => {
         let entries = await Profile.findAll();
         res.status(200).json(entries)
     } catch (err) {
-        res.status(500).json({ error: err})
+        res.status(500).json({ error: err })
     }
 });
 
@@ -48,12 +49,30 @@ router.get('/mine', validateSession, async (req, res) => {
     //     .catch(err => res.status(500).json({ error: err }))
 
     try {
-        let entries = await Profile.findAll({ where: { userId: owner}});
+        let entries = await Profile.findAll({ where: { userId: owner } });
         res.status(200).json(entries)
     } catch (err) {
-        res.status(500).json({ error: err})
+        res.status(500).json({ error: err })
     }
 });
+
+// router.get('/cloudsign', valsess, async (req, res) => {
+//     try {
+//         const ts = Math.floor(new Date().getTime() / 1000).toString()
+
+//         const sig = cloudinary.utils.api_sign_request(
+//             { timestamp: ts, upload_preset: 'cloudinary-mayhem' },
+//             process.env.CLOUDINARY_SECRET
+//         )
+//         res.status(200).json({
+//             sig, ts
+//         })
+//     } catch (err) {
+//         res.status(500).json({
+//             message: 'failed to sign'
+//         })
+//     }
+// })
 
 router.put('/update/:entryId', validateSession, async (req, res) => {
     const updateProfileEntry = {
@@ -71,8 +90,8 @@ router.put('/update/:entryId', validateSession, async (req, res) => {
         let entries = await Profile.update(updateProfileEntry, query);
         res.status(200).json(entries)
     } catch (err) {
-        res.status(500).json({ error: err})
-    }        
+        res.status(500).json({ error: err })
+    }
 });
 
 router.delete('/delete/:id', validateSession, async (req, res) => {
@@ -84,9 +103,9 @@ router.delete('/delete/:id', validateSession, async (req, res) => {
 
     try {
         let entries = await Profile.destroy(query);
-        res.status(200).json( { message: 'Entry Deleted'})
+        res.status(200).json({ message: 'Entry Deleted' })
     } catch (err) {
-        res.status(500).json({ error: err});
+        res.status(500).json({ error: err });
     }
 });
 
