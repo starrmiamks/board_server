@@ -56,6 +56,19 @@ router.get('/mine', validateSession, async (req, res) => {
     }
 });
 
+router.get('/one/:id', (req, res) => {
+    Profile.findOne({
+        where: { id: req.params.id },
+    })
+        .then((profile) =>
+            res.status(200).json({
+                message: 'Profile Retrieved',
+                profile,
+            })
+        )
+        .catch((err) => res.status(500).json({ error: err }));
+});
+
 // router.get('/cloudsign', valsess, async (req, res) => {
 //     try {
 //         const ts = Math.floor(new Date().getTime() / 1000).toString()

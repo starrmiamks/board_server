@@ -42,6 +42,16 @@ router.get('/mine', validateSession, async (req,res) => {
     }
 });
 
+router.get('/all', validateSession, (req, res) => {
+    if (!req.err && req.user.admin){
+        Subscription.findAll()
+        .then((user) => res.status(200).json(user))
+        .catch((err) => res.status(500).json({ error: err }));
+    } else {
+        return res.status(500).send({ message: 'Not Authorized' });
+    }
+})
+
 router.put('/update/:entryId', validateSession, async (req, res) => {
     const updateSubscription = {
         streetAddress1: req.body.subscription.streetAddress1,
