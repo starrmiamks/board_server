@@ -10,7 +10,7 @@ router.post('/register', function (req, res) {
         password: bcrypt.hashSync(req.body.user.password, 13),
         firstName: req.body.user.firstName,
         lastName: req.body.user.lastName,
-        admin: req.body.user.admin
+        isAdmin: req.body.user.isAdmin
     })
         .then(
             function registerSuccess(user) {
@@ -53,12 +53,12 @@ router.post('/login', function (req, res) {
 });
 
 router.put('/admin/:id', validateSession, (req, res) => {
-    if (!req.err && req.body.user.admin) {
+    if (!req.err && req.body.user.isAdmin) {
         const updateUser = {
             firstName: req.body.user.firstName,
             lastName: req.body.user.lastName,
             email: req.body.user.email,
-            admin: req.body.user.admin,
+            isAdmin: req.body.user.isAdmin,
         };
         if (req.body.user.password != '') {
             updateUser.password = bcrypt.hashSync(req.body.user.password, 13)
@@ -117,7 +117,7 @@ router.get('/', validateSession, (req, res) => {
 });
 
 router.get('/all', validateSession, (req, res) => {
-    if (!req.err && req.body.user.admin){
+    if (!req.err && req.body.user.isAdmin){
         User.findALL()
         .then((user) => res.status(200).json(user))
         .catch((err) => res.status(500).json({ error: err }));

@@ -43,7 +43,7 @@ router.get('/mine', validateSession, async (req,res) => {
 });
 
 router.get('/all', validateSession, (req, res) => {
-    if (!req.err && req.user.admin){
+    if (!req.err && req.user.isAdmin){
         Subscription.findAll()
         .then((user) => res.status(200).json(user))
         .catch((err) => res.status(500).json({ error: err }));
